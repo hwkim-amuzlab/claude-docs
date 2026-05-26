@@ -8,8 +8,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | 파일 | 설명 |
 |------|------|
-| `.claude/commands/build-domain.md` | `/build-domain <name>` — 디자인 기반으로 도메인 전 레이어 생성 (types→mapper→service→store→MSW mock). 백엔드 API 없이 선행 개발할 때 사용 |
+| `.claude/commands/build-domain.md` | `/build-domain <name>` — 디자인 기반으로 도메인 전 레이어 생성 (types→mapper→service→store→MSW mock→뼈대 테스트→타입 명세표). 백엔드 API 없이 선행 개발할 때 사용 |
 | `.claude/commands/integrate-domain.md` | `/integrate-domain <name>` — 백엔드 API 완성 후 실제 스펙과 타입 동기화, mock 비활성화 (Swagger URL은 실행 시 대화형으로 입력) |
+| `.claude/commands/update-domain.md` | `/update-domain <name>` — 기존 도메인 부분 수정 시 변경 유형 분류 → 영향 레이어만 선택적으로 수정 |
 | `.claude/commands/add-domain.md` | `/add-domain <name>` — 빈 파일 스캐폴딩만 필요할 때 단독 사용 (통상 build-domain이 대체) |
 | `.claude/commands/generate-types.md` | `/generate-types` — OpenAPI 스펙에서 타입 생성 후 도메인별 분리 |
 
@@ -21,6 +22,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 | `.claude/rules/mapper-patterns.md` | 매퍼 작성 규칙 (null 방어, 네이밍) |
 | `.claude/rules/service-patterns.md` | 서비스 작성 규칙 (mock 분기 금지, envelope 언래핑) |
 | `.claude/rules/store-patterns.md` | 스토어 작성 규칙 (markRaw, loading 패턴) |
+| `.claude/rules/update-patterns.md` | 부분 수정 시나리오별 레이어 수정 순서 (Case 1~6) |
 
 ## 도메인 개발 워크플로우
 
@@ -41,6 +43,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
             → MSW 핸들러 주석 처리 (bypass로 실제 API 통과)
 
 5. [사람] 테스트 확인 (npm run test, npm run test:e2e)
+
+**이후 부분 수정이 필요한 경우:** `/update-domain <name>` 실행
+            → 변경 유형 분류 (필드 추가 / 새 엔드포인트 / UI 수정 등)
+            → 영향 레이어만 선택적으로 수정 (.claude/rules/update-patterns.md 기준)
 ```
 
 **백엔드보다 프론트엔드가 먼저 개발된다.** `/build-domain`이 생성한 assumed types는 임시이며, `/integrate-domain` 실행 시 실제 스펙과 대조해 수정한다.
