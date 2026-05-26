@@ -11,6 +11,48 @@
 
 ---
 
+## [1.4.0] — 2026-05-26
+
+### [추가] `templates/main.ts`
+PrimeVue + MSW 호환성 처리가 포함된 앱 엔트리 템플릿 추가.
+- `AppPreset` — Toast의 `color-mix()` 의존성을 정적 색상값으로 오버라이드 (Chrome 102 이하 호환)
+- MSW bootstrap 순서 보장 (`worker.start()` → `app.mount()`)
+- PrimeVue 한국어 로케일 기본 설정
+
+### [개선] `CLAUDE.md`
+App Entry 섹션 추가 — `AppPreset` 오버라이드 이유 및 MSW bootstrap 순서 설명.
+
+---
+
+## [1.3.0] — 2026-05-26
+
+### [추가] `templates/vite.config.ts`
+Tailwind v4 + PrimeVue Aura 조합의 CSS 호환성 문제를 처음부터 해결한 Vite 설정 템플릿 추가.
+- `legacyMediaQueryPlugin` — CSS Range 문법 → 구형 브라우저 호환 변환 (빌드 시)
+- `runtimeConfigPlugin` — `public/config.js` 개발 서버 제공
+- PostCSS: oklch/oklab 색상 함수 호환 처리
+
+### [개선] `CLAUDE.md`
+Vite Config 섹션 추가 — 커스텀 플러그인 설명 및 필요 패키지 기술.
+
+---
+
+## [1.2.0] — 2026-05-26
+
+### [추가] `templates/eslint.config.js`
+ESLint v9+ flat config 템플릿 추가.
+- Vue 3 + TypeScript 기본 규칙 포함
+- `consistent-type-imports` 강제로 타입 import 일관성 확보
+
+### [추가] `templates/.prettierrc`, `templates/.prettierignore`
+Prettier 설정 템플릿 추가. `semi: false`, `singleQuote: true`, `printWidth: 100`.
+
+### [개선] `CLAUDE.md`
+- `npm run format` 커맨드 추가
+- Linting & Formatting 섹션 추가 (규칙 설명 + 필요 패키지)
+
+---
+
 ## [1.1.0] — 2026-05-26
 
 ### [추가] `rules/update-patterns.md`
