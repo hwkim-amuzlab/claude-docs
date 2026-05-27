@@ -11,6 +11,26 @@
 
 ---
 
+## [1.5.0] — 2026-05-27
+
+### [수정] `templates/vite.config.ts`
+`vue-tsc --noEmit` 기준 타입 에러 3건 수정.
+- `configureServer(server)` → `server: ViteDevServer` 타입 명시
+- `middlewares.use` 콜백 파라미터 `_req: IncomingMessage`, `res: ServerResponse` 타입 명시
+- `generateBundle` 번들 파라미터 타입을 커스텀 Record에서 Rollup 공식 `OutputBundle`로 교체
+
+### [개선] `CLAUDE.md`
+- `src/layouts/` 디렉토리 레이어 구조 표에 추가 (AppLayout.vue 위치 명시)
+- `src/mocks/` 설명의 handler 파일명 오타 수정 (`<domain>.ts` → `<domain>.handler.ts`)
+- `Recommended dependencies` 섹션 추가 — 초기 세팅용 권장 패키지 버전 목록 및 `@primeuix/themes` 패키지명 주의사항
+
+### [개선] `rules/service-patterns.md`
+- `Interceptor Unwrapping` 섹션 추가 — `response.data` 교체 방식 코드 예시 (서비스에서 `data === T` 임을 명시)
+- `Toast from Interceptor` 섹션 추가 — Pinia 스토어 큐 방식으로 인터셉터에서 토스트 호출하는 패턴 문서화
+  - `httpNotice.store.ts` (큐) → `interceptors.ts` (push) → `AppLayout.vue` (watch/shift) 흐름
+
+---
+
 ## [1.4.0] — 2026-05-26
 
 ### [추가] `templates/main.ts`

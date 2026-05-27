@@ -8,6 +8,9 @@ import { PrimeVueResolver } from '@primevue/auto-import-resolver'
 import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
+import type { ViteDevServer } from 'vite'
+import type { IncomingMessage, ServerResponse } from 'node:http'
+import type { OutputBundle } from 'rollup'
 import { defineConfig } from 'vite'
 
 const pkg = JSON.parse(readFileSync(new URL('./package.json', import.meta.url), 'utf-8'))
@@ -20,10 +23,10 @@ const require = createRequire(import.meta.url)
 function runtimeConfigPlugin() {
   return {
     name: 'runtime-config',
-    configureServer(server) {
+    configureServer(server: ViteDevServer) {
       const fs = require('node:fs')
       const path = require('node:path')
-      server.middlewares.use('/config.js', (_req, res) => {
+      server.middlewares.use('/config.js', (_req: IncomingMessage, res: ServerResponse) => {
         const configPath = path.resolve('public/config.js')
         const content = fs.readFileSync(configPath, 'utf-8')
         res.setHeader('Content-Type', 'application/javascript')
@@ -42,7 +45,7 @@ function legacyMediaQueryPlugin() {
   return {
     name: 'legacy-media-query',
     apply: 'build' as const,
-    generateBundle(_: unknown, bundle: Record<string, { type: string; fileName: string; source: string | Uint8Array }>) {
+    generateBundle(_: unknown, bundle: OutputBundle) {
       for (const file of Object.values(bundle)) {
         if (file.type === 'asset' && String(file.fileName).endsWith('.css')) {
           file.source = String(file.source)
