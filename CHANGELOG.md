@@ -11,6 +11,18 @@
 
 ---
 
+## [1.6.0] — 2026-05-27
+
+### [수정] `commands/build-domain.md`
+- Phase 2 MSW handler 등록 지시에 `src/mocks/server.ts` (테스트용) 추가 — 기존에는 `browser.ts`만 명시되어 서비스 단위 테스트에서 핸들러를 찾지 못하는 문제 있었음
+- Phase 2 Global setup의 CSS 파일 경로를 `src/style.css` → `src/assets/tailwind.css`로 수정 — `templates/main.ts`의 실제 import 경로와 일치
+
+### [수정] `commands/integrate-domain.md`
+- Phase 2 수정 대상에 `src/stores/<domain>.store.ts` 추가 — API 응답 구조 변경 시 store state·action 시그니처도 영향받을 수 있으므로 확인 후 수정하도록 명시 (불필요 시 skip)
+- Phase 2 사전 참조 규칙 파일에 `store-patterns.md` 추가
+
+---
+
 ## [1.5.0] — 2026-05-27
 
 ### [수정] `templates/vite.config.ts`

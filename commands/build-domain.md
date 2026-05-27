@@ -29,10 +29,10 @@ Always check `package.json` for installed library versions — implement against
 
 ## Phase 2 — Mock & UI (parallel after Phase 1)
 
-- **MSW handler** (`src/mocks/handlers/<domain>.handler.ts`) — handlers for all service endpoints with realistic Korean mock data. Register in `src/mocks/browser.ts`.
+- **MSW handler** (`src/mocks/handlers/<domain>.handler.ts`) — handlers for all service endpoints with realistic Korean mock data. Register in both `src/mocks/browser.ts` (dev) and `src/mocks/server.ts` (tests).
 - **Components** (`src/components/<domain>/`) — one SFC per visual section. Props passed from parent view. Layout components go in `src/components/layout/`.
 - **View** (`src/views/<Domain>View.vue`) — fetches via store in `onMounted`, composes components, thin. Add a route in `src/router/index.ts`.
-- **Global setup** — register new libraries in `src/main.ts`, design tokens as CSS vars in `src/style.css`.
+- **Global setup** — register new libraries in `src/main.ts`, design tokens as CSS vars in `src/assets/tailwind.css`.
 
 ---
 

@@ -28,12 +28,13 @@ Print the full diff report and stop. Ask the user to confirm changes and how to 
 
 ## Phase 2 — Apply Updates (after user confirms)
 
-Read `.claude/rules/type-declarations.md` and `.claude/rules/mapper-patterns.md` before editing.
+Read `.claude/rules/type-declarations.md`, `.claude/rules/mapper-patterns.md`, and `.claude/rules/store-patterns.md` before editing.
 
 Update the following in order:
 1. `src/types/<domain>.types.ts` — apply all `⚠️` corrections, add `🆕` fields, remove confirmed `❌` fields, update the view model if needed
 2. `src/mappers/<domain>.mapper.ts` — reflect type changes, add/remove field mappings accordingly
 3. `src/services/<domain>.service.ts` — correct endpoint paths or request/response shapes if they differ from the spec
+4. `src/stores/<domain>.store.ts` — if state shape or action signatures are affected by type changes, update accordingly; otherwise skip
 
 ---
 
