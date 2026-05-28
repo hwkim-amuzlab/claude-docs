@@ -4,7 +4,7 @@ Vue 3 + TypeScript SPA.
 
 **Stack:** Vue 3 (Composition API), Pinia, Vue Router, PrimeVue 4 (Aura theme), Tailwind CSS v4, Axios, MSW
 
-**Setup files:** `vite.config.ts`, `main.ts`, `eslint.config.js`, `.prettierrc` — `.claude/templates/`에서 복사한다.
+**Templates:** `templates/`에서 복사한다 — setup 파일(`vite.config.ts`, `main.ts`, `eslint.config.js`, `.prettierrc`) + 기본 view 4개(`HomeView`, `LoginView`, `AccessDeniedView`, `NotFoundView`)
 
 ---
 

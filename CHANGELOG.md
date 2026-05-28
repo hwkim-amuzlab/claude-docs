@@ -11,6 +11,21 @@
 
 ---
 
+## [1.13.0] — 2026-05-28
+
+### [개선] `commands/apply-design.md`
+AppLayout 공유 셸 컴포넌트 확인 단계를 Step 0에서 Phase 7로 이동, Global Setup 순서 조정.
+- AppLayout 확인을 도메인 구현(Phase 1~6) 완료 후로 이동 — 구현 여부 결정 시 `src/layout/` 하위에 작성
+- Global Setup(라이브러리 등록, 디자인 토큰)을 Phase 5 → Phase 2로 이동 — 컴포넌트보다 먼저 전역 설정이 적용되도록 순서 조정
+- Phase 번호 전체 재정렬 (1~8)
+
+### [개선] `architecture/overview.md`
+Templates 항목 추가 및 기존 Setup files 항목 통합.
+- setup 파일 4개와 기본 view 4개(`HomeView`, `LoginView`, `AccessDeniedView`, `NotFoundView`)를 한 줄로 정리
+- 경로 오기 수정: `.claude/templates/` → `templates/`
+
+---
+
 ## [1.12.0] — 2026-05-28
 
 ### [개선] `commands/apply-design.md`

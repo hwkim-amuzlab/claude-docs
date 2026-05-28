@@ -38,10 +38,6 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 번들을 파싱한 후 불명확한 인터랙션이나 데이터 바인딩이 있으면 구현 전에 질문한다.
 
-### 5. AppLayout 공유 셸 컴포넌트 확인
-
-번들에 TopBar, Sidebar 등 `AppLayout`에 속하는 공유 셸 컴포넌트가 포함된 경우, 해당 컴포넌트를 현재 도메인 작업 범위에 포함할지 별도 작업으로 분리할지 사용자에게 확인한다. 확인 없이 도메인 컴포넌트와 함께 구현하거나 무시하지 않는다.
-
 ---
 
 ## Phase 1 — 데이터 레이어 완성
@@ -55,7 +51,18 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 2 — Components (`src/components/<domain>/`)
+## Phase 2 — Global Setup
+
+번들의 README에서 요구하는 전역 설정이 있으면 적용한다.
+
+- 새 라이브러리 → `src/main.ts`에 등록
+- 디자인 토큰 (CSS 변수) → `src/assets/tailwind.css`에 추가
+
+이미 프로젝트에 설정된 항목은 건드리지 않는다.
+
+---
+
+## Phase 3 — Components (`src/components/<domain>/`)
 
 비주얼 섹션당 하나의 SFC를 생성한다.
 
@@ -66,7 +73,7 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 3 — View (`src/views/<Domain>View.vue`)
+## Phase 4 — View (`src/views/<Domain>View.vue`)
 
 - `onMounted`에서 store action을 호출하여 데이터를 fetch한다
 - 컴포넌트를 조합하는 thin layer — 비즈니스 로직은 store에 위임한다
@@ -74,23 +81,12 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 4 — Router
+## Phase 5 — Router
 
 `src/router/index.ts`에 route를 추가한다.
 
 - `AppLayout`으로 감싼다 (`/login`, `/access-denied`, `/404` 제외)
 - 필요한 경우 `meta.roles`로 접근 권한을 설정한다
-
----
-
-## Phase 5 — Global Setup
-
-번들의 README에서 요구하는 전역 설정이 있으면 적용한다.
-
-- 새 라이브러리 → `src/main.ts`에 등록
-- 디자인 토큰 (CSS 변수) → `src/assets/tailwind.css`에 추가
-
-이미 프로젝트에 설정된 항목은 건드리지 않는다.
 
 ---
 
@@ -104,7 +100,13 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 7 — Type Check
+## Phase 7 — AppLayout 공유 셸 컴포넌트
+
+번들에 TopBar, Sidebar 등 `AppLayout`에 속하는 공유 셸 컴포넌트가 포함된 경우, 해당 컴포넌트를 지금 구현할지 별도 작업으로 분리할지 사용자에게 확인한다. 구현하기로 결정한 경우 `src/layout/` 하위에 작성한다. 확인 없이 무시하거나 도메인 컴포넌트와 함께 암묵적으로 처리하지 않는다.
+
+---
+
+## Phase 8 — Type Check
 
 ```bash
 npm run typecheck
