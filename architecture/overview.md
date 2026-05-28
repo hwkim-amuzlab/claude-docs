@@ -65,6 +65,7 @@ src/config.ts       - Runtime config: reads from Vite env vars or window.__APP_C
     "axios": "^1.x",
     "pinia": "^2.x",
     "primevue": "^4.x",
+    "primeicons": "^7.x",
     "@primeuix/themes": "^1.x",
     "vue": "^3.5",
     "vue-router": "^4.x"

@@ -42,7 +42,19 @@ URL을 fetch하고 README.md를 읽는다.
 
 ---
 
-## Phase 1 — 전역 CSS 변수 (`src/assets/tailwind.css`)
+## Phase 1 — 전역 패키지 확인 (`src/main.ts`)
+
+다음 패키지가 설치되어 있는지 `package.json`으로 확인한다. 없으면 설치 후 임포트를 추가한다.
+
+| 패키지 | 설치 명령 | `main.ts` 임포트 |
+|--------|-----------|-----------------|
+| `primeicons` | `npm install primeicons` | `import 'primeicons/primeicons.css'` |
+
+임포트는 `@/assets/tailwind.css` 보다 앞에 위치한다.
+
+---
+
+## Phase 2 — 전역 CSS 변수 (`src/assets/tailwind.css`)
 
 번들의 디자인 토큰을 `@layer base { :root { … } }` 블록에 추가한다.
 
@@ -51,7 +63,7 @@ URL을 fetch하고 README.md를 읽는다.
 
 ---
 
-## Phase 2 — AppLayout (`src/layouts/AppLayout.vue`)
+## Phase 3 — AppLayout (`src/layouts/AppLayout.vue`)
 
 번들 명세를 기준으로 구현한다.
 
@@ -62,7 +74,7 @@ URL을 fetch하고 README.md를 읽는다.
 
 ---
 
-## Phase 3 — TopBar (`src/components/layout/TopBar.vue`)
+## Phase 4 — TopBar (`src/components/layout/TopBar.vue`)
 
 번들에 TopBar 명세가 있을 때만 생성한다.
 
@@ -76,7 +88,7 @@ TopBar를 생성했다면 `AppLayout.vue`에 import하고 배치한다.
 
 ---
 
-## Phase 4 — 시각 확인 항목 보고
+## Phase 5 — 시각 확인 항목 보고
 
 구현 완료 후 다음을 사용자에게 보고한다.
 
@@ -89,7 +101,7 @@ TopBar를 생성했다면 `AppLayout.vue`에 import하고 배치한다.
 
 ---
 
-## Phase 5 — Type Check
+## Phase 6 — Type Check
 
 ```bash
 npm run typecheck

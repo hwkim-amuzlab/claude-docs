@@ -11,6 +11,18 @@
 
 ---
 
+## [1.10.0] — 2026-05-28
+
+### [개선] `commands/setup-layout.md`
+`primeicons` 패키지 누락으로 아이콘이 표시되지 않는 문제를 사전 차단.
+- Phase 1 추가: `package.json`에서 `primeicons` 설치 여부 확인 → 없으면 설치 후 `main.ts`에 CSS 임포트
+- 기존 Phase 1~5를 Phase 2~6으로 번호 재정렬
+
+### [개선] `architecture/overview.md`
+권장 의존성 목록에 `primeicons` 추가.
+
+---
+
 ## [1.9.0] — 2026-05-28
 
 ### [추가] `commands/setup-layout.md`
