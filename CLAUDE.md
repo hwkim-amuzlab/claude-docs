@@ -78,3 +78,4 @@ npm run test:e2e     # Playwright e2e tests
 - [`http-client.md`](.claude/architecture/http-client.md) — Axios 인스턴스, 인터셉터, ApiResponse 패턴
 - [`mock-strategy.md`](.claude/architecture/mock-strategy.md) — MSW 패턴, mock→실제 전환
 - [`testing.md`](.claude/architecture/testing.md) — 레이어별 테스트 전략
+- [`docker.md`](.claude/architecture/docker.md) — Dockerfile, nginx.conf(SPA 라우팅 + index.html 캐시 방지)

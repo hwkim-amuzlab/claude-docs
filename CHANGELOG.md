@@ -11,6 +11,26 @@
 
 ---
 
+## [1.14.0] — 2026-05-28
+
+### [추가] `architecture/docker.md`
+Docker 빌드 및 nginx 설정 문서 신규 추가.
+- Dockerfile: multi-stage 빌드 (Node → nginx:alpine)
+- nginx.conf: SPA 라우팅(`try_files`) + `index.html` 캐시 방지(`no-cache, no-store, must-revalidate`)
+- `docker-build.sh`: `package.json` version 자동 태깅, `--platform linux/amd64` 빌드, 대화형 push 확인
+
+### [개선] `CLAUDE.md`
+`architecture/docker.md` 참조 항목 추가.
+
+### [개선] `architecture/overview.md`
+- Templates 항목 수정: view 파일 목록 제거, setup 파일만 명시 (`vite.config.ts`, `main.ts`, `eslint.config.js`, `.prettierrc`)
+- devDependencies에 `jsdom ^26.x` 추가 — Vitest `environment: 'jsdom'` 사용 시 필수
+
+### [삭제] `templates/*.vue` 기본 view 파일 4개
+`HomeView`, `LoginView`, `AccessDeniedView`, `NotFoundView` 삭제.
+
+---
+
 ## [1.13.0] — 2026-05-28
 
 ### [개선] `commands/apply-design.md`
