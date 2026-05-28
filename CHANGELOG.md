@@ -11,6 +11,14 @@
 
 ---
 
+## [1.11.0] — 2026-05-28
+
+### [개선] `commands/done.md`
+품질 게이트(Step 3)에 `npm run lint` 추가.
+- `typecheck`, `test` 앞에 `lint` 먼저 실행하도록 순서 지정
+
+---
+
 ## [1.10.0] — 2026-05-28
 
 ### [개선] `commands/setup-layout.md`

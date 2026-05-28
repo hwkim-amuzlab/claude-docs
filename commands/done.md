@@ -31,6 +31,7 @@ Review completed work and verify quality before committing.
 ## Step 3 — 품질 게이트
 
 ```bash
+npm run lint
 npm run typecheck
 npm run test
 ```
