@@ -16,8 +16,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |--------|------|
 | `/start <작업 설명>` | 맥락 파악 → 복잡도 판단(S/M/L) → 작업 계획 보고. 코드 수정 전에 실행 |
 | `/done` | Diff 재검토 → 불변 제약 점검 → typecheck/test → 커밋 준비 완료 |
-| `/build-domain <name>` | 데이터 레이어 생성 (types→mapper→service→store→MSW mock→뼈대 테스트→타입 명세표) |
-| `/apply-design <name>` | 디자인 번들 → components→view→router. `/build-domain` 이후 실행 |
+| `/build-domain <name>` | 도메인 뼈대 생성 (빈 types→mapper 시그니처→service→store) |
+| `/apply-design <name>` | 디자인 번들 → 타입 확정 + mapper 완성 + MSW mock + components→view→router. `/build-domain` 이후 실행 |
 | `/integrate-domain <name>` | 백엔드 API 완성 후 실제 스펙과 타입 동기화, mock 비활성화 |
 | `/update-domain <name>` | 기존 도메인 부분 수정 — 변경 유형 분류 → 영향 레이어만 선택적 수정 |
 
@@ -25,13 +25,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 도메인 개발 워크플로우
 
-**백엔드보다 프론트엔드가 먼저 개발된다.** `/build-domain`이 생성한 assumed types는 임시이며, `/integrate-domain` 실행 시 실제 스펙과 대조해 수정한다.
+**백엔드보다 프론트엔드가 먼저 개발된다.** 타입은 디자인 번들의 mock 데이터로 확정하고, `/integrate-domain` 실행 시 실제 백엔드 스펙과 동기화한다.
 
 ```
 1. [사람]  Claude Design으로 디자인 완료
-2. [Claude] /build-domain <name>   → 데이터 레이어 + 타입 명세표
-3. [Claude] /apply-design <name>   → 디자인 번들 → components + view
-4. [사람]  API 구현 (타입 명세표 기반으로 백엔드와 협의)
+2. [Claude] /build-domain <name>   → 도메인 뼈대 (빈 타입 + 시그니처)
+3. [Claude] /apply-design <name>   → 디자인 번들 → 타입 확정 + mock 데이터 + components + view
+4. [사람]  API 구현 (확정된 타입 기반으로 백엔드와 협의)
 5. [Claude] /integrate-domain <name>  → Swagger diff → types/mapper 수정 → MSW 비활성화
 6. [사람]  npm run test && npm run test:e2e
 

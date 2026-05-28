@@ -1,4 +1,4 @@
-Implement UI components and view from a Claude Design handoff bundle.
+Implement UI components and complete the data layer from a Claude Design handoff bundle.
 Run `/build-domain` first — this command requires types and store to already exist.
 
 ## Usage
@@ -25,6 +25,7 @@ Claude Design 핸드오프 URL을 요청한다. URL을 받기 전에 다음 단�
 URL을 fetch하고 README.md를 읽는다.
 
 ### 3. 스타일 구현 규칙
+
 PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 디자인의 px값은 아래 우선순위로 변환한다.
 1. Tailwind 표준 스케일에 해당하는 값이면 표준 클래스를 사용한다.
@@ -39,7 +40,18 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 1 — Components (`src/components/<domain>/`)
+## Phase 1 — 데이터 레이어 완성
+
+번들의 mock 데이터를 기반으로 진행한다.
+
+- mock 데이터 구조를 파악하여 `<Domain>` 타입 필드를 확정한다
+- `src/mappers/<domain>.mapper.ts`의 TODO 구현을 완성한다
+- `src/mocks/handlers/<domain>.handler.ts`를 생성하고 번들의 mock 데이터를 그대로 사용한다
+- `src/mocks/browser.ts`(dev)와 `src/mocks/server.ts`(tests) 양쪽에 등록한다
+
+---
+
+## Phase 2 — Components (`src/components/<domain>/`)
 
 비주얼 섹션당 하나의 SFC를 생성한다.
 
@@ -50,7 +62,7 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 2 — View (`src/views/<Domain>View.vue`)
+## Phase 3 — View (`src/views/<Domain>View.vue`)
 
 - `onMounted`에서 store action을 호출하여 데이터를 fetch한다
 - 컴포넌트를 조합하는 thin layer — 비즈니스 로직은 store에 위임한다
@@ -58,7 +70,7 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 3 — Router
+## Phase 4 — Router
 
 `src/router/index.ts`에 route를 추가한다.
 
@@ -67,7 +79,7 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 4 — Global Setup
+## Phase 5 — Global Setup
 
 번들의 README에서 요구하는 전역 설정이 있으면 적용한다.
 
@@ -78,7 +90,17 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 5 — Type Check
+## Phase 6 — Skeleton Tests
+
+기존 테스트 파일을 참고하여 컴파일·실행은 되지만 assertion은 stub 상태인 테스트를 생성한다.
+
+- `tests/unit/mappers/<domain>.mapper.test.ts` — 정상 매핑 + nullable 필드 fallback
+- `tests/unit/services/<domain>.service.test.ts` — 성공 응답 + 에러 응답 (MSW server)
+- `tests/unit/stores/<domain>.store.test.ts` — 초기 상태 + action 성공 + `isLoading` 에러 시 reset
+
+---
+
+## Phase 7 — Type Check
 
 ```bash
 npm run typecheck

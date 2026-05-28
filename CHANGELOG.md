@@ -11,6 +11,25 @@
 
 ---
 
+## [1.8.0] — 2026-05-28
+
+### [개선] `commands/build-domain.md`
+`/build-domain`의 역할을 도메인 뼈대 생성으로 축소.
+- `<Domain>` 뷰모델 타입은 빈 인터페이스로만 선언 — 필드 예측 금지
+- mapper는 함수 시그니처만 작성하고 내부는 TODO로 유지
+- MSW mock 핸들러, skeleton tests, type spec table 생성을 `/apply-design`으로 이동
+
+### [개선] `commands/apply-design.md`
+디자인 번들의 mock 데이터를 기반으로 데이터 레이어까지 완성하도록 역할 확장.
+- Phase 1 추가: mock 데이터 구조로 `<Domain>` 타입 필드 확정 → mapper 구현 완성 → MSW mock 핸들러 생성
+- skeleton tests를 타입 확정 이후 단계로 이동
+- 기존 UI 구현 phases (components, view, router, global setup, type check) 번호 재정렬
+
+### [개선] `CLAUDE.md`
+커맨드 설명 및 도메인 개발 워크플로우 다이어그램 업데이트.
+
+---
+
 ## [1.7.0] — 2026-05-28
 
 ### [추가] `rules/core-constraints.md`
