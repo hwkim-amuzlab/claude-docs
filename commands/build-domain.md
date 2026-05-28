@@ -1,59 +1,96 @@
-Scaffold and implement all layers for a new domain based on a Claude Design handoff bundle.
+Scaffold the data layer for a new domain. UI components are handled separately by `/apply-design`.
 
 ## Usage
 
+```
 /build-domain <domain-name>
+```
 
 ---
 
-## Step 0 — Read the Handoff Bundle
+## Step 0 — 작업 파악
 
-Ask the user to attach the Claude Design handoff URL. Do not proceed until the URL is received.
+작업 전에 프로젝트를 확인한다.
 
-Fetch the URL, read its README.md, and follow its instructions. Understand the data structures, design tokens, library dependencies, and any global setup required. Apply anything missing from the project before writing domain-specific code.
-
-Ask the user if anything is ambiguous before proceeding.
-
----
-
-## Phase 1 — Data Layer (sequential)
-
-Always check `package.json` for installed library versions — implement against the project's actual version, not what the design prototype uses.
-
-1. **Types** (`src/types/<domain>.types.ts`) — assumed backend shape (`Api<Domain>`) + frontend view model (`<Domain>`). Pure declarations only; follow `.claude/rules/type-declarations.md`.
-2. **Mapper** (`src/mappers/<domain>.mapper.ts`) — converts `Api<Domain>` to `<Domain>`. Follow `.claude/rules/mapper-patterns.md`.
-3. **Service** (`src/services/<domain>.service.ts`) — Axios calls, mapper delegation. Follow `.claude/rules/service-patterns.md`.
-4. **Store** (`src/stores/<domain>.store.ts`) — Pinia state + actions wrapping the service. Follow `.claude/rules/store-patterns.md`.
+1. `package.json`에서 설치된 라이브러리 버전 확인 — 프로젝트 실제 버전 기준으로 구현한다
+2. `src/types/`, `src/services/`, `src/stores/`에 동일 도메인이 이미 있는지 확인
+3. 중복이 있으면 사용자에게 알리고 진행 방식을 확인한다
 
 ---
 
-## Phase 2 — Mock & UI (parallel after Phase 1)
+## Phase 1 — Data Layer (순차 실행)
 
-- **MSW handler** (`src/mocks/handlers/<domain>.handler.ts`) — handlers for all service endpoints with realistic Korean mock data. Register in both `src/mocks/browser.ts` (dev) and `src/mocks/server.ts` (tests).
-- **Components** (`src/components/<domain>/`) — one SFC per visual section. Props passed from parent view. Layout components go in `src/components/layout/`.
-- **View** (`src/views/<Domain>View.vue`) — fetches via store in `onMounted`, composes components, thin. Add a route in `src/router/index.ts`.
-- **Global setup** — register new libraries in `src/main.ts`, design tokens as CSS vars in `src/assets/tailwind.css`.
+### 1. Types (`src/types/<domain>.types.ts`)
+
+`.claude/rules/type-declarations.md`를 읽고 작성한다.
+
+- 백엔드 형태: `Api<Domain>` (snake_case 필드)
+- 프론트엔드 뷰모델: `<Domain>` (camelCase 필드)
+- 이 시점의 `Api<Domain>`은 **assumed spec** — `/integrate-domain` 실행 시 실제 스펙과 동기화한다
+- Nullable 필드는 `T | null`로 선언한다. 함부로 non-null 가정하지 않는다
+
+### 2. Mapper (`src/mappers/<domain>.mapper.ts`)
+
+`.claude/rules/mapper-patterns.md`를 읽고 작성한다.
+
+- `Api<Domain>` → `<Domain>` 변환 함수만 포함한다
+- null/undefined 방어 처리를 반드시 포함한다
+
+### 3. Service (`src/services/<domain>.service.ts`)
+
+`.claude/rules/service-patterns.md`를 읽고 작성한다.
+
+- Axios 호출만 포함한다. mock 분기, 환경 조건문 금지
+- 응답 후 반드시 mapper를 호출한다
+
+### 4. Store (`src/stores/<domain>.store.ts`)
+
+`.claude/rules/store-patterns.md`를 읽고 작성한다.
+
+- Pinia options API 스타일
+- async action은 try/finally로 loading 플래그를 반드시 reset한다
+
+---
+
+## Phase 2 — MSW Mock Handler
+
+`src/mocks/handlers/<domain>.handler.ts`를 생성한다.
+
+- 서비스의 모든 엔드포인트에 대한 handler를 작성한다
+- 한국어 현실적인 mock 데이터를 사용한다
+- `src/mocks/browser.ts`(dev)와 `src/mocks/server.ts`(tests) 양쪽에 등록한다
 
 ---
 
 ## Phase 3 — Skeleton Tests
 
-Generate skeleton test files that compile and run, with assertions left as stubs. Use existing test files in the project as reference.
+기존 테스트 파일을 참고하여 컴파일·실행은 되지만 assertion은 stub 상태인 테스트를 생성한다.
 
-- `tests/unit/mappers/<domain>.mapper.test.ts` — normal mapping + nullable field fallback
-- `tests/unit/services/<domain>.service.test.ts` — success response + error response via MSW server
-- `tests/unit/stores/<domain>.store.test.ts` — initial state + action success + `isLoading` reset on error
+- `tests/unit/mappers/<domain>.mapper.test.ts` — 정상 매핑 + nullable 필드 fallback
+- `tests/unit/services/<domain>.service.test.ts` — 성공 응답 + 에러 응답 (MSW server)
+- `tests/unit/stores/<domain>.store.test.ts` — 초기 상태 + action 성공 + `isLoading` 에러 시 reset
 
 ---
 
 ## Phase 4 — Type Spec Table
 
-Print a table of `Api<Domain>` fields (snake_case name, type, nullable, description) and the assumed endpoints so the backend team can review and agree before implementing the API.
+`Api<Domain>` 필드 목록을 표로 출력한다.
 
-Note that this is an assumed spec — actual sync happens via `/integrate-domain` once the backend is ready.
+| 필드명 (snake_case) | 타입 | Nullable | 설명 |
+|---------------------|------|----------|------|
+
+assumed 엔드포인트 목록도 함께 출력한다. 백엔드 팀과 협의하기 위한 임시 명세다.
 
 ---
 
 ## Phase 5 — Type Check
 
-Run `npm run typecheck`. Fix all errors before finishing.
+```bash
+npm run typecheck
+```
+
+오류가 있으면 수정 후 완료한다.
+
+---
+
+> **다음 단계:** UI 구현은 `/apply-design <domain-name>`으로 진행한다.

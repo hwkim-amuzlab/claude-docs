@@ -11,6 +11,58 @@
 
 ---
 
+## [1.7.0] — 2026-05-28
+
+### [추가] `rules/core-constraints.md`
+모든 작업의 기준이 되는 불변 제약 5개와 사고 모델 문서 추가.
+- 불변 제약: 읽기 우선 / 패턴 준수 / 정책 보존 / 최소 변경 / 스코프 준수
+- 사고 흐름: `GROUND → APPLY → VERIFY`, 실패 시 `ADAPT`
+- 작업 규모 S/M/L 판단 기준 및 레이어별 수정 원칙 포함
+
+### [추가] `commands/start.md`
+코드 수정 전 맥락 파악 커맨드 `/start` 추가.
+- Step 1 GROUND: 관련 파일 탐색 (수정 없이 읽기만)
+- Step 2: S/M/L 복잡도 판단 → L이면 서브태스크 분해 제안
+- Step 3: 작업 계획(수정 레이어·순서·주의사항) 보고 후 사람 확인 대기
+
+### [추가] `commands/done.md`
+작업 완료 후 품질 검증 커맨드 `/done` 추가.
+- Step 1: 변경 파일 전체 Diff 재검토
+- Step 2: `core-constraints.md` 불변 제약 5개 체크리스트 점검
+- Step 3: `npm run typecheck` + `npm run test` 실행 및 오류 수정
+- Step 4: 커밋 메시지 초안 출력
+
+### [추가] `commands/apply-design.md`
+UI 구현 전용 커맨드 `/apply-design` 추가. `/build-domain` 이후 실행.
+- Step 0: 데이터 레이어 존재 확인 → Claude Design 핸드오프 번들 수신
+- Phase 1: Components (`src/components/<domain>/`) — SFC 단위 분리
+- Phase 2: View (`src/views/<Domain>View.vue`) — store 연결, thin view
+- Phase 3: Router 등록 (`src/router/index.ts`)
+- Phase 4: `npm run typecheck` 실행 후 오류 수정
+
+### [개선] `commands/build-domain.md`
+UI 구현 부분을 `/apply-design`으로 분리하여 책임을 명확히 재정의.
+- Step 0을 "핸드오프 번들 수신"에서 "프로젝트 파악"으로 전환 — 중복 도메인 존재 여부 확인 포함
+- Phase 1 각 레이어를 별도 섹션으로 분리하고 규칙 파일 참조 명시
+- Phase 2에서 컴포넌트·뷰 생성 제거 → MSW handler 생성만 담당
+- 하단에 "다음 단계: `/apply-design`" 안내 추가
+
+### [추가] `architecture/` 디렉토리 — 아키텍처 상세 문서 분리
+`CLAUDE.md`에서 아키텍처 설명을 4개 파일로 분리.
+- `overview.md` — 레이어 구조, 네이밍 규칙, 스택, 의존성 목록
+- `http-client.md` — Axios 인스턴스, 인터셉터, ApiResponse 패턴
+- `mock-strategy.md` — MSW handler 등록 원칙, mock→실제 전환 절차
+- `testing.md` — 레이어별 테스트 전략 (mapper/service/store)
+
+### [개선] `CLAUDE.md`
+아키텍처 상세 내용을 `architecture/`로 이관하고 구조 전면 개편.
+- "핵심 원칙" 섹션 추가 — `core-constraints.md` 참조 및 GROUND→APPLY→VERIFY 사고 흐름 명시
+- 커맨드 표를 `/start`, `/done`, `/apply-design` 포함 6개로 확장
+- 도메인 개발 워크플로우를 6단계(디자인→build-domain→apply-design→API→integrate-domain→테스트)로 갱신
+- 규칙 파일 표에 `core-constraints.md` 추가
+
+---
+
 ## [1.6.0] — 2026-05-27
 
 ### [수정] `commands/build-domain.md`
