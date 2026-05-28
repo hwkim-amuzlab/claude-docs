@@ -11,6 +11,24 @@
 
 ---
 
+## [1.9.0] — 2026-05-28
+
+### [추가] `commands/setup-layout.md`
+프로젝트 최초 1회 실행하는 레이아웃 설정 커맨드 `/setup-layout` 추가.
+- Step 0: AppLayout 현재 상태 확인 → Claude Design 핸드오프 번들 수신
+- Phase 1: 전역 CSS 변수를 `tailwind.css`에 추가 (기존 변수 보호)
+- Phase 2: AppLayout에 배경색·padding·max-width 적용
+- Phase 3: TopBar 컴포넌트 생성 — 번들 명세가 있을 때만 (조건부)
+- Phase 4: 적용 결과 보고 (적용된 값 + 생략된 항목)
+- Phase 5: `npm run typecheck` 실행 후 오류 수정
+
+### [개선] `CLAUDE.md`
+`/setup-layout` 커맨드 추가 및 워크플로우에 신규 프로젝트 단계 명시.
+- 커맨드 테이블에 `/setup-layout` 항목 추가
+- 도메인 개발 워크플로우에 "신규 프로젝트 — 최초 1회" 섹션 추가
+
+---
+
 ## [1.8.0] — 2026-05-28
 
 ### [개선] `commands/build-domain.md`

@@ -16,6 +16,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 |--------|------|
 | `/start <작업 설명>` | 맥락 파악 → 복잡도 판단(S/M/L) → 작업 계획 보고. 코드 수정 전에 실행 |
 | `/done` | Diff 재검토 → 불변 제약 점검 → typecheck/test → 커밋 준비 완료 |
+| `/setup-layout <bundle-url>` | AppLayout 스타일 + TopBar + 전역 CSS 변수 설정. 프로젝트 최초 1회 실행 |
 | `/build-domain <name>` | 도메인 뼈대 생성 (빈 types→mapper 시그니처→service→store) |
 | `/apply-design <name>` | 디자인 번들 → 타입 확정 + mapper 완성 + MSW mock + components→view→router. `/build-domain` 이후 실행 |
 | `/integrate-domain <name>` | 백엔드 API 완성 후 실제 스펙과 타입 동기화, mock 비활성화 |
@@ -28,6 +29,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **백엔드보다 프론트엔드가 먼저 개발된다.** 타입은 디자인 번들의 mock 데이터로 확정하고, `/integrate-domain` 실행 시 실제 백엔드 스펙과 동기화한다.
 
 ```
+[신규 프로젝트 — 최초 1회]
+0. [Claude] /setup-layout <bundle-url>  → AppLayout + TopBar + 전역 CSS 변수
+
+[도메인 개발 — 반복]
 1. [사람]  Claude Design으로 디자인 완료
 2. [Claude] /build-domain <name>   → 도메인 뼈대 (빈 타입 + 시그니처)
 3. [Claude] /apply-design <name>   → 디자인 번들 → 타입 확정 + mock 데이터 + components + view
