@@ -4,7 +4,7 @@ Vue 3 + TypeScript SPA.
 
 **Stack:** Vue 3 (Composition API), Pinia, Vue Router, PrimeVue 4 (Aura theme), Tailwind CSS v4, Axios, MSW
 
-**Setup files:** `vite.config.ts`, `main.ts`, `eslint.config.js`, `.prettierrc` — `.claude/templates/`에서 복사한다.
+**Setup files:** `vite.config.ts`, `main.ts`, `eslint.config.js`, `.prettierrc`, `src/mocks/browser.ts`, `src/mocks/server.ts`, `tests/setup.ts`, `tests/utils/msw.ts` — `.claude/templates/`에서 복사한다.
 
 ---
 
@@ -78,6 +78,7 @@ tests/utils/        - Test helper functions such as ApiResponse MSW helpers
     "@primevue/auto-import-resolver": "^4.x",
     "@tailwindcss/vite": "^4.x",
     "@vitejs/plugin-vue": "^5.x",
+    "@pinia/testing": "^1.x",
     "@vitest/coverage-v8": "^3.x",
     "@vue/test-utils": "^2.x",
     "msw": "^2.x",

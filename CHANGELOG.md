@@ -27,6 +27,7 @@
 - dev mock(`bypass`)과 unit test mock(`error`) 정책 분리
 - `tests/setup.ts`, `tests/utils/msw.ts` 기준 추가
 - service test는 `server.use(...)`와 test utils helper 기반으로 생성
+- MSW/test setup 템플릿 추가 및 `@pinia/testing` devDependency 추가
 
 ---
 
