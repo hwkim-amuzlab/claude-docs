@@ -19,15 +19,21 @@
 - 백엔드 Claude Code에 그대로 전달할 데이터 요구사항 프롬프트만 출력
 - API URL, Method, 엔드포인트 수, DB 구조 추측, 프론트 내부 파일 경로 포함 금지
 
+### [추가] `commands/build-tests.md`
+`/build-tests <domain-name>` 커맨드 추가.
+- test setup과 도메인 skeleton tests 생성을 `/apply-design`에서 분리
+- service test는 `server.use(...)`와 test utils helper 기반으로 생성
+
 ### [개선] `CLAUDE.md`
-도메인 개발 워크플로우에 `/request-api` 단계를 `/apply-design`과 `/integrate-domain` 사이에 추가.
+도메인 개발 워크플로우에 `/build-tests`, `/request-api` 단계를 `/apply-design`과 `/integrate-domain` 사이에 추가.
 
 ### [개선] Test Setup
-- 스켈레톤 테스트 생성 기준을 `/apply-design` Phase 6으로 정정
+- 스켈레톤 테스트 생성 기준을 `/build-tests`로 정정
 - dev mock(`bypass`)과 unit test mock(`error`) 정책 분리
 - `tests/setup.ts`, `tests/utils/msw.ts` 기준 추가
 - service test는 `server.use(...)`와 test utils helper 기반으로 생성
 - MSW/test setup 템플릿 추가 및 `@pinia/testing` devDependency 추가
+- `CLAUDE.md` 커맨드/워크플로우 정정
 
 ---
 

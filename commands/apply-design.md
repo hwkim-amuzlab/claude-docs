@@ -46,9 +46,9 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 - mock 데이터 구조를 파악하여 `<Domain>` 타입 필드를 확정한다
 - `src/mappers/<domain>.mapper.ts`의 TODO 구현을 완성한다
+- `src/mocks/browser.ts`가 없으면 `.claude/templates/src/mocks/browser.ts`에서 복사한다
 - `src/mocks/handlers/<domain>.handler.ts`를 생성하고 번들의 mock 데이터를 그대로 사용한다
 - `src/mocks/browser.ts`(dev)에 handler를 등록한다
-- `src/mocks/server.ts`는 `setupServer()` 인스턴스만 export한다
 
 ---
 
@@ -91,25 +91,13 @@ PrimeVue 컴포넌트, Tailwind CSS를 기본으로 사용한다.
 
 ---
 
-## Phase 6 — Skeleton Tests
-
-기존 테스트 파일을 참고하여 컴파일·실행은 되지만 assertion은 stub 상태인 테스트를 생성한다.
-
-- `tests/unit/mappers/<domain>.mapper.test.ts` — 정상 매핑 + nullable 필드 fallback
-- `tests/unit/services/<domain>.service.test.ts` — `server.use(...)`로 성공 응답 + 에러 응답을 테스트 내부에 등록
-- `tests/unit/stores/<domain>.store.test.ts` — service mock 기반 초기 상태 + action 성공 + `isLoading` 에러 시 reset
-
-Service test는 `tests/utils/msw.ts` helper를 사용하고, 개발용 handler에 의존하지 않는다.
-
----
-
-## Phase 7 — AppLayout 공유 셸 컴포넌트
+## Phase 6 — AppLayout 공유 셸 컴포넌트
 
 번들에 TopBar, Sidebar 등 `AppLayout`에 속하는 공유 셸 컴포넌트가 포함된 경우, 해당 컴포넌트를 지금 구현할지 별도 작업으로 분리할지 사용자에게 확인한다. 구현하기로 결정한 경우 `src/layout/` 하위에 작성한다. 확인 없이 무시하거나 도메인 컴포넌트와 함께 암묵적으로 처리하지 않는다.
 
 ---
 
-## Phase 8 — Type Check
+## Phase 7 — Type Check
 
 ```bash
 npm run typecheck

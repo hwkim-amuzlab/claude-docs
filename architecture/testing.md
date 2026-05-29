@@ -47,7 +47,7 @@ tests/
 
 ## 스켈레톤 테스트 기준
 
-`/apply-design`이 타입 확정 이후 생성하는 스켈레톤 테스트는 컴파일·실행은 되지만 assertion은 stub 상태다.  
+`/build-tests`가 타입 확정 이후 생성하는 스켈레톤 테스트는 컴파일·실행은 되지만 assertion은 stub 상태다.  
 실제 구현 완료 후 채운다.
 
 - `mappers/<domain>.mapper.test.ts` — 정상 매핑 + nullable 필드 fallback
