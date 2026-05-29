@@ -19,6 +19,23 @@ src/mocks/
 
 ---
 
+## Mock 응답 envelope
+
+MSW handler의 JSON body는 실제 API와 동일하게 `ApiResponse<T>` envelope을 사용한다.  
+
+```typescript
+const body: ApiResponse<ApiDashboard> = {
+  code: 'OK',
+  data: mockDashboard,
+  message: 'success',
+  timestamp: new Date().toISOString(),
+}
+
+return HttpResponse.json(body)
+```
+
+---
+
 ## Mock → 실제 API 전환
 
 백엔드 완성된 엔드포인트는 handler의 해당 엔드포인트를 **주석 처리**하면 자동으로 실제 API로 전환된다.  
