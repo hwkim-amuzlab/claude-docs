@@ -11,6 +11,19 @@
 
 ---
 
+## [1.15.0] — 2026-05-29
+
+### [추가] `commands/request-api.md`
+`/request-api <domain-name>` 커맨드 추가.
+- `/apply-design` 이후 확정된 mock 데이터, 타입, UI 사용처를 분석
+- 백엔드 Claude Code에 그대로 전달할 데이터 요구사항 프롬프트만 출력
+- API URL, Method, 엔드포인트 수, DB 구조 추측, 프론트 내부 파일 경로 포함 금지
+
+### [개선] `CLAUDE.md`
+도메인 개발 워크플로우에 `/request-api` 단계를 `/apply-design`과 `/integrate-domain` 사이에 추가.
+
+---
+
 ## [1.14.0] — 2026-05-28
 
 ### [추가] `architecture/docker.md`
