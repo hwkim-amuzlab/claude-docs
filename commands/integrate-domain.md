@@ -40,7 +40,9 @@ Update the following in order:
 
 ## Phase 3 — Disable Mock Handlers
 
-Comment out all handlers in `src/mocks/handlers/<domain>.handler.ts`. Unhandled requests pass through to the real server automatically via `onUnhandledRequest: 'bypass'`.
+Comment out all handlers in `src/mocks/handlers/<domain>.handler.ts`. In dev, unhandled requests pass through to the real server automatically via `onUnhandledRequest: 'bypass'`.
+
+Service unit tests must use test-local `server.use(...)` handlers.
 
 ---
 

@@ -1,3 +1,5 @@
+/// <reference types="vitest" />
+
 import { fileURLToPath, URL } from 'node:url'
 import { createRequire } from 'node:module'
 import { readFileSync } from 'node:fs'
@@ -92,6 +94,10 @@ export default defineConfig({
   },
   define: {
     __APP_VERSION__: JSON.stringify(pkg.version),
+  },
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['tests/setup.ts'],
   },
   build: {
     cssMinify: 'lightningcss',

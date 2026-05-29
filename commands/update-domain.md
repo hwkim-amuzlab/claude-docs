@@ -34,7 +34,7 @@ Follow the layer order defined in `update-patterns.md` for the identified case. 
 
 ## Step 4 — Update Tests
 
-Update the corresponding skeleton test file for each modified layer. If a skeleton test file does not exist yet, create one following the guidelines in `commands/build-domain.md` Phase 3.
+Update the corresponding skeleton test file for each modified layer. If a skeleton test file does not exist yet, create one following the guidelines in `commands/apply-design.md` Phase 6.
 
 ---
 

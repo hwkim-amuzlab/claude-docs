@@ -24,6 +24,8 @@ src/constants/      - API message code → Korean text mappings (apiMessage.ts)
 src/mocks/          - MSW handlers (handlers/<domain>.handler.ts) + browser/server setup
 src/declarations/   - TypeScript ambient declarations — window.__APP_CONFIG__는 optional + Readonly로 선언
 src/config.ts       - Runtime config: reads from Vite env vars or window.__APP_CONFIG__
+tests/setup.ts      - Vitest + MSW test server lifecycle
+tests/utils/        - Test helper functions such as ApiResponse MSW helpers
 ```
 
 ---

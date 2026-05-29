@@ -22,6 +22,12 @@
 ### [개선] `CLAUDE.md`
 도메인 개발 워크플로우에 `/request-api` 단계를 `/apply-design`과 `/integrate-domain` 사이에 추가.
 
+### [개선] Test Setup
+- 스켈레톤 테스트 생성 기준을 `/apply-design` Phase 6으로 정정
+- dev mock(`bypass`)과 unit test mock(`error`) 정책 분리
+- `tests/setup.ts`, `tests/utils/msw.ts` 기준 추가
+- service test는 `server.use(...)`와 test utils helper 기반으로 생성
+
 ---
 
 ## [1.14.0] — 2026-05-28

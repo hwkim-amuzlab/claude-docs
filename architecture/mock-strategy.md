@@ -3,8 +3,10 @@
 ## 원칙
 
 Mock 제어는 **MSW handler 등록 여부**로만 한다.  
-`onUnhandledRequest: 'bypass'`로 handler가 없는 요청은 실제 서버로 자동 통과한다.  
 서비스 파일에 mock 분기, 환경 조건문을 작성하지 않는다.
+
+- Dev browser worker: `onUnhandledRequest: 'bypass'` — handler가 없는 요청은 실제 서버로 통과
+- Test server setup: `onUnhandledRequest: 'error'` — handler가 없는 요청은 테스트 실패
 
 ---
 
@@ -13,9 +15,17 @@ Mock 제어는 **MSW handler 등록 여부**로만 한다.
 ```
 src/mocks/
 ├── browser.ts                  - setupWorker (dev)
-├── server.ts                   - setupServer (tests)
+├── server.ts                   - setupServer instance (tests)
 └── handlers/<domain>.handler.ts
+
+tests/
+├── setup.ts                    - MSW test server lifecycle
+└── utils/msw.ts                - ApiResponse success/error helpers
 ```
+
+- `browser.ts`: 개발용 domain handler 등록
+- `server.ts`: `setupServer()` 인스턴스 export
+- Service unit test handler: 테스트 내부에서 `server.use(...)`로 등록
 
 ---
 
@@ -42,6 +52,8 @@ return HttpResponse.json(body)
 서비스·스토어 수정 불필요.
 
 실제 응답과 assumed 타입이 다를 경우 먼저 `/integrate-domain`으로 타입을 동기화한다.
+
+Service unit test는 개발용 handler에 의존하지 않는다.
 
 ---
 
