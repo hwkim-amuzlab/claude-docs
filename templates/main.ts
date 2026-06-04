@@ -99,7 +99,6 @@ app.use(PrimeVue, {
 })
 app.use(ToastService)
 app.use(ConfirmationService)
-app.use(VueApexCharts)
 
 /**
  * MSW worker가 준비된 이후에 app.mount()를 호출해야 첫 API 요청이 mock을 건너뛰지 않는다.
