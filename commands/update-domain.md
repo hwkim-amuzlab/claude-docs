@@ -34,7 +34,16 @@ Follow the layer order defined in `update-patterns.md` for the identified case. 
 
 ## Step 4 — Update Tests
 
-Update the corresponding skeleton test file for each modified layer. If a skeleton test file does not exist yet, create one following the guidelines in `commands/build-tests.md`.
+수정된 레이어에 해당하는 테스트 파일을 업데이트한다.
+테스트 파일이 없으면 `commands/build-tests.md`의 Phase 2 기준으로 생성한다.
+
+- **타입 변경** (필드 추가/제거): mapper test 입력 mock + service test `server.use()` body를 새 `Api*` shape에 맞게 수정
+- **mapper 로직 변경**: mapper test의 출력 assertions 수정
+- **service 엔드포인트/응답 변경**: service test의 `server.use()` URL 또는 response body 수정
+- **store action 변경**: store test의 service mock 반환값 또는 state assertions 수정
+- **새 기능 추가**: 해당 레이어 테스트에 새 케이스 추가
+
+기존 assertion 중 변경과 무관한 것은 건드리지 않는다.
 
 ---
 
