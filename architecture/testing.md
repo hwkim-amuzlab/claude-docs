@@ -48,16 +48,16 @@ playwright.config.ts
 
 ---
 
-## 스켈레톤 테스트 기준
+## Unit Test 생성 기준
 
-`/build-tests`가 타입 확정 이후 생성하는 스켈레톤 테스트는 컴파일·실행은 되지만 assertion은 stub 상태다.  
-실제 구현 완료 후 채운다.
+`/build-tests`는 `/integrate-domain` 이후 실행한다. 실제 백엔드 스펙 기준으로 확정된 구현을 읽고, 의미 있는 assertion을 포함한 unit test를 생성한다.
 
-- `mappers/<domain>.mapper.test.ts` — 정상 매핑 + nullable 필드 fallback
-- `services/<domain>.service.test.ts` — `server.use(...)`로 성공 응답 + 에러 응답 등록
-- `stores/<domain>.store.test.ts` — service mock 기반 초기 상태 + action 성공 + `isLoading` 에러 시 reset
+- `mappers/<domain>.mapper.test.ts` — 실제 `Api*` 타입 기준 정상 매핑 + nullable 필드 fallback
+- `services/<domain>.service.test.ts` — `server.use(...)`로 실제 `Api*` shape mock 등록, 성공/에러 응답 검증
+- `stores/<domain>.store.test.ts` — service `vi.mock()` 기반 초기 state + action 성공/실패 state 전이 검증
 
-Service unit test는 개발용 `src/mocks/handlers/<domain>.handler.ts`에 의존하지 않는다.
+Service unit test는 개발용 `src/mocks/handlers/<domain>.handler.ts`에 의존하지 않는다.  
+테스트 파일이 이미 존재하면 덮어쓰지 않고 누락된 케이스만 추가한다.
 
 ---
 

@@ -12,16 +12,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## 커맨드
 
-| 커맨드 | 설명 |
-|--------|------|
-| `/start <작업 설명>` | 맥락 파악 → 복잡도 판단(S/M/L) → 작업 계획 보고. 코드 수정 전에 실행 |
-| `/done` | Diff 재검토 → 불변 제약 점검 → typecheck/test → 커밋 준비 완료 |
-| `/build-domain <name>` | 도메인 뼈대 생성 (빈 types→mapper 시그니처→service→store) |
-| `/apply-design <name>` | 디자인 번들 → 타입 확정 + mapper 완성 + MSW dev mock + components→view→router. `/build-domain` 이후 실행 |
-| `/build-tests <name>` | 확정된 도메인 레이어 기준 unit test setup + skeleton tests 생성 |
-| `/request-api <name>` | 구현된 프론트 mock/UI 분석 → 백엔드 전달용 데이터 요구사항 프롬프트 생성 |
-| `/integrate-domain <name>` | 백엔드 API 완성 후 실제 스펙과 타입 동기화, mock 비활성화 |
-| `/update-domain <name>` | 기존 도메인 부분 수정 — 변경 유형 분류 → 영향 레이어만 선택적 수정 |
+| 커맨드                        | 설명                                                                                        |
+| -------------------------- | ----------------------------------------------------------------------------------------- |
+| `/start <작업 설명>`           | 맥락 파악 → 복잡도 판단(S/M/L) → 작업 계획 보고. 코드 수정 전에 실행                                             |
+| `/done`                    | Diff 재검토 → 불변 제약 점검 → typecheck/test → 커밋 준비 완료                                           |
+| `/build-domain <name>`     | 도메인 뼈대 생성 (빈 types→mapper 시그니처→service→store)                                             |
+| `/apply-design <name>`     | 디자인 번들 → 타입 확정 + mapper 완성 + MSW dev mock + components→view→router. `/build-domain` 이후 실행 |
+| `/build-tests <name>`      | 백엔드 연동 완료 후 test infrastructure setup + 실제 assertion unit tests 생성. `/integrate-domain` 이후 실행 |
+| `/request-api <name>`      | 구현된 프론트 mock/UI 분석 → 백엔드 전달용 데이터 요구사항 프롬프트 생성                                             |
+| `/integrate-domain <name>` | 백엔드 API 완성 후 실제 스펙과 타입 동기화, mock 비활성화                                                     |
+| `/update-domain <name>`    | 기존 도메인 부분 수정 — 변경 유형 분류 → 영향 레이어만 선택적 수정                                                  |
 
 ---
 
@@ -35,14 +35,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 1. [사람]  Claude Design으로 디자인 완료
 2. [Claude] /build-domain <name>   → 도메인 뼈대 (빈 타입 + 시그니처)
 3. [Claude] /apply-design <name>   → 디자인 번들 → 타입 확정 + mock 데이터 + components + view
-4. [Claude] /build-tests <name>    → unit test setup + skeleton tests
-5. [Claude] /request-api <name>    → 백엔드 전달용 데이터 요구사항 프롬프트 생성
-6. [사람]  API 구현 (백엔드가 기존 백엔드 코드베이스 기준으로 API 설계)
-7. [Claude] /integrate-domain <name>  → Swagger diff → types/mapper 수정 → MSW 비활성화
-8. [사람]  npm run test && npm run test:e2e
+4. [Claude] /request-api <name>    → 백엔드 전달용 데이터 요구사항 프롬프트 생성
+5. [사람]  API 구현 (백엔드가 기존 백엔드 코드베이스 기준으로 API 설계)
+6. [Claude] /integrate-domain <name>  → Swagger diff → types/mapper 수정 → MSW 비활성화
+7. [Claude] /build-tests <name>    → test infrastructure + 실제 assertion unit tests 생성
+8. [사람]  npm run test:e2e  (critical path만)
 
 이후 부분 수정: /start → /update-domain <name> → /done
-디자인만 변경:  /start → /apply-design <name> → (데이터 shape 변경 시 /build-tests <name>) → /done
+디자인만 변경:  /start → /apply-design <name> → /done
 ```
 
 ---
