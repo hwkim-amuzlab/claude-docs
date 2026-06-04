@@ -11,6 +11,75 @@
 
 ---
 
+## [1.16.5] — 2026-06-04
+
+### [삭제] E2E 전략 전면 철회
+1.16.0~1.16.4에서 추가·수정한 E2E 관련 내용을 전부 제거.
+- `architecture/testing.md`: E2E 레이어·섹션 전체 삭제, 디렉토리 구조에서 `e2e/` 제거
+- `CLAUDE.md`: 워크플로우 8번(`npm run test && npm run test:e2e`) 제거, `npm run test:e2e` 커맨드 제거
+- `templates/playwright.config.ts` 삭제
+
+---
+
+## [1.16.4] — 2026-06-04
+
+### [개선] `architecture/testing.md`
+E2E 작성 기준을 CRUD 중심으로 변경.
+- CRUD 흐름(Create/Read/Update/Delete)을 E2E 기본 대상으로 명시, 각 패턴 정의
+- CRUD 외 흐름은 별도 2가지 기준으로 판단
+- 5~10개 상한선 제거
+
+---
+
+## [1.16.3] — 2026-06-04
+
+### [개선] `architecture/testing.md`
+E2E critical path 판단 기준 문서화.
+- 3가지 판단 기준 명시: 핵심 가치, 사용 빈도, 레이어 조합 복잡도
+- Critical / Non-critical 예시 추가
+- 판단 시점: `/integrate-domain` 완료 후 팀이 결정
+- E2E 5~10개 이내 상한선 명시
+
+---
+
+## [1.16.2] — 2026-06-04
+
+### [개선] `commands/update-domain.md`
+Step 4 테스트 업데이트 지침 구체화.
+- "skeleton test file" → 실제 assertion 기반 테스트 파일로 용어 정정
+- 변경 유형별(타입/mapper/service/store/새 기능) 테스트 수정 범위 명시
+- 무관한 기존 assertion 보존 원칙 추가
+
+---
+
+## [1.16.1] — 2026-06-04
+
+### [개선] `commands/build-tests.md`
+`/build-tests` 역할 재정의 및 워크플로우 실행 시점 변경.
+- skeleton 테스트 생성 → 실제 assertion을 포함한 unit test 생성으로 전환
+- 사전 조건을 `/apply-design` 완료 → `/integrate-domain` 완료로 변경
+- 테스트 파일이 이미 존재하면 덮어쓰지 않고 누락 케이스만 추가
+
+### [개선] `CLAUDE.md`
+워크플로우에서 `/build-tests` 위치를 4번 → 7번(`/integrate-domain` 이후)으로 이동.
+
+### [개선] `architecture/testing.md`
+스켈레톤 테스트 기준 → Unit Test 생성 기준으로 내용 전면 갱신.
+
+---
+
+## [1.16.0] — 2026-06-04
+
+### [추가] `architecture/testing.md`
+E2E 전략 섹션 추가 (1.16.5에서 제거됨).
+- mock/real 모드 환경 분기(`PLAYWRIGHT_API=real`)
+- `page.route()` 에러 케이스 패턴
+- E2E 스켈레톤 테스트 패턴
+- 디렉토리 구조에 `e2e/<domain>/<domain>.spec.ts` 추가
+
+### [추가] `templates/playwright.config.ts`
+환경변수 기반 dev/preview 서버 분기 템플릿 추가 (1.16.5에서 삭제됨).
+
 ## [1.15.1] — 2026-06-04
 
 ### [수정] `templates/main.ts`
