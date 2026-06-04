@@ -39,8 +39,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 5. [사람]  API 구현 (백엔드가 기존 백엔드 코드베이스 기준으로 API 설계)
 6. [Claude] /integrate-domain <name>  → Swagger diff → types/mapper 수정 → MSW 비활성화
 7. [Claude] /build-tests <name>    → test infrastructure + 실제 assertion unit tests 생성
-8. [사람]  npm run test:e2e  (critical path만)
-
 이후 부분 수정: /start → /update-domain <name> → /done
 디자인만 변경:  /start → /apply-design <name> → /done
 ```
@@ -69,7 +67,6 @@ npm run lint         # ESLint with auto-fix
 npm run format       # Prettier format
 npm run typecheck    # vue-tsc type check only
 npm run test         # Vitest unit tests
-npm run test:e2e     # Playwright e2e tests
 ```
 
 ---
