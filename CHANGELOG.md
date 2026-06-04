@@ -11,6 +11,13 @@
 
 ---
 
+## [1.15.1] — 2026-06-04
+
+### [수정] `templates/main.ts`
+`VueApexCharts` 미처리 잔재 제거 — import 없는 `app.use(VueApexCharts)` 호출이 템플릿에 남아있어 새 프로젝트 적용 시 런타임 에러 발생.
+
+---
+
 ## [1.14.0] — 2026-05-28
 
 ### [추가] `architecture/docker.md`
