@@ -14,6 +14,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 | 커맨드                        | 설명                                                                                        |
 | -------------------------- | ----------------------------------------------------------------------------------------- |
+| `/setup-project`              | 신규 프로젝트 초기 세팅 — 템플릿 복사 → 의존성 설치 → MSW 초기화                                                 |
 | `/start <작업 설명>`           | 맥락 파악 → 복잡도 판단(S/M/L) → 작업 계획 보고. 코드 수정 전에 실행                                             |
 | `/done`                    | Diff 재검토 → 불변 제약 점검 → typecheck/test → 커밋 준비 완료                                           |
 | `/build-domain <name>`     | 도메인 뼈대 생성 (빈 types→mapper 시그니처→service→store)                                             |

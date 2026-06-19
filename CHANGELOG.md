@@ -11,6 +11,31 @@
 
 ---
 
+## [1.16.6] — 2026-06-19
+
+### [추가] `commands/setup-project.md`
+신규 프로젝트 초기 세팅 커맨드 추가.
+- `npm create vue@latest` 직후 실행하는 `/setup-project` 커맨드 정의
+- 템플릿 파일 복사 → 디렉토리 생성 → 패키지 설치 → MSW 초기화 + 타입 체크 순서로 진행
+- 완료 후 다음 단계로 `/build-infra` 안내
+
+### [추가] `commands/build-infra.md`
+공통 인프라 구현 커맨드 추가.
+- `/setup-project` 완료 후 첫 도메인 개발 전 1회 실행하는 `/build-infra` 커맨드 정의
+- Phase 1(공통 타입·설정) → Phase 2(HTTP 클라이언트) → Phase 3(레이아웃·라우터) → Phase 4(정리 및 타입 체크) 단계 정의
+- `architecture/http-client.md` 기반 구현 지침 포함
+
+### [추가] `commands/grill-me.md`
+설계 인터뷰 커맨드 추가.
+- 플랜·설계를 집중적으로 검토하는 `/grill-me` 커맨드 정의
+- 결정 트리의 각 분기를 순서대로 질문하며, 질문마다 권장 답변 제시
+- 코드베이스로 답변 가능한 질문은 탐색 후 직접 답변
+
+### [개선] `CLAUDE.md`
+커맨드 테이블에 `/setup-project` 추가.
+
+---
+
 ## [1.16.5] — 2026-06-04
 
 ### [삭제] E2E 전략 전면 철회
